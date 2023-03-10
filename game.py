@@ -147,11 +147,11 @@ class Friend(Character):
         return fight_with
 
 
-defeated = 0
 class Enemy(Character):
     """
     Create an enemy.
     """
+    defeated = 0
     def __init__(self, name, description):
         """
         Create attributes of an enemy.
@@ -177,17 +177,15 @@ class Enemy(Character):
         Fight with an enemy if you have an object which
         makes his weak.
         """
-        global defeated
         if fight_with == self.weakness:
-            defeated += 1
+            Enemy.defeated += 1
         return fight_with == self.weakness
 
     def get_defeated(self):
         """
         Return a number an enemy was defeated.
         """
-        global defeated
-        return defeated
+        return Enemy.defeated
 
 
 class Item:
