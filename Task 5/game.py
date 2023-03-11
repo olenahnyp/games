@@ -35,24 +35,6 @@ class Character:
         print(f'[{self.name} says]: {self.conversation}')
 
 
-class Player(Character):
-    """
-    Create a player.
-    """
-    def __init__(self, name):
-        """
-        Create attributes of a player.
-        """
-        super().__init__(name, None)
-        self.defeated = 0
-
-    def greet(self):
-        """
-        Greet a player.
-        """
-        print(f'Hello, {self.name}!\nWelcome to the game.')
-
-
 class Room:
     """
     Create a room.

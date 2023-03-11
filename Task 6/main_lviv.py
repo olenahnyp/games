@@ -118,7 +118,7 @@ while playing:
         current_street = current_street.move(command)
     elif command == "говорити":
         character.talk()
-    elif command == "допомога":
+    elif command == "допомогти":
         if character is not None:
             print("Чим ти можеш допомогти?")
             help_item = input("> ")
@@ -168,3 +168,5 @@ while playing:
         current_street.cafe = None
     elif command == "рюкзак":
         print(backpack)
+    else:
+        print("Такої команди немає.")

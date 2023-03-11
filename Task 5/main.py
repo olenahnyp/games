@@ -42,8 +42,7 @@ backpack = []
 dead = False
 
 name_input = input('Enter your name to start the game: ')
-character = game.Player(name_input)
-character.greet()
+print(f'Hello, {name_input}!\nWelcome to the game.')
 start = input('Press enter if you`re ready')
 
 if start == '':
