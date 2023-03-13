@@ -1,11 +1,12 @@
 import game_lviv
 
 print("О, ні! Лекція з основ програмування починається через 30 хвилин, а ти досі не в УКУ.\n\
-Ти зараз на проспекті Свободи, але тобі потрібно доїхати на Козельницьку. Якщо підеш пішки, \n\
+Ти зараз на Проспекті Свободи, але тобі потрібно доїхати на Козельницьку. Якщо підеш пішки, \n\
 то запізнишся, тому потрібно знайти 15 гривень на маршрутку. Ти поспішав, тому забув взяти \n\
-гаманець, тому поквапся і знайти людей, які зможуть дати тобі гроші. Можеш перевірити свій \n\
-баланс, написавши команду 'баланс', або перевірити, що знаходиться у твоєму рюкзаку,\n\
-написавши команду 'рюкзак'.")
+гаманець, тож поквапся і знайти людей, які зможуть дати тобі гроші.")
+print("Команди:\n'баланс' - перевірити баланс\n'рюкзак' - перевірити рюкзак\n'говорити' - говортити\
+до персонажа\n'допомогти' - допомогти персонажеві\n'направо' або 'наліво' - перейти на іншу вулицю\
+'взяти' - взяти предмет, який лежить на вулиці")
 
 start = input("Напиши 'старт', щоб почати гру.\n> ")
 
@@ -43,21 +44,22 @@ gorodotska.link_street(teatralna, "направо")
 tourist = game_lviv.Friend("Турист", "Хлопець з Англії, який загубився на вулиці Театральна.\n\
 Йому потрібно пройти до проспекти Свободи. Підкажи йому, щоб отримати нагороду.")
 tourist.set_conversation("Hello! Can you help me please? I want to get to Prospect Svobody.\n\
-Where should I go?")
+Where should I go? Maybe you have a map?")
 tourist.set_needed_item("карта")
 tourist.set_thanks("Thank you so much!")
 teatralna.set_character(tourist)
 
 blogger = game_lviv.Friend("Блогер", "Дівчинка, яка знімає відео в Tik-Tok. Потрібно відповісти\n\
 на 3 запитання, які стосуються історії Львова, щоб отримати нагороду.")
-blogger.set_conversation("Привіт, не хочеш взяти участь у моєму відео?")
+blogger.set_conversation("Привіт, не хочеш взяти участь у моєму відео? Можеш використати для цього\n\
+книжку з історії Львова.")
 blogger.set_needed_item("книжка")
 blogger.set_thanks("Дякую за участь. Відео вийшло дуже крутим!")
 prospect_svobody.set_character(blogger)
 
 granny = game_lviv.Friend("Бабуся", "Бабуся, якій потрібно допогти перейти вулицю. Допоможи, щоб\n\
 отримати нагороду.")
-granny.set_conversation("Вітаю! Чи не могли б ви допомогти мені?")
+granny.set_conversation("Вітаю! Чи не могли б ви потримати мою руку і допомогти перейти дорогу?")
 granny.set_needed_item("руки")
 granny.set_thanks("Дякую за допомогу. Тримай пляцок, який я спекла.")
 granny.set_bonus('пляцок')
@@ -65,13 +67,13 @@ gorodotska.set_character(granny)
 
 friend = game_lviv.Friend("Друг", "Друг-богослов з УКУ, який допоможе тобі в будь-яку хвилину.\n\
 Однак, ти не можеш просто так взяти гроші. Пригости його кавою, щоб отримати нагороду.")
-friend.set_conversation("Привіт, у тебе хіба немає сьогодні першої пари?")
+friend.set_conversation("Привіт, ти вже пив цього ранку каву? Не хочеш піти разом?")
 friend.set_needed_item("кава")
 friend.set_thanks("Дякую за каву. Тримай гроші на дорогу.")
 kopernyka.set_character(friend)
 
 gypsy = game_lviv.Enemy("Циган", "Чоловік, який непомітно може вкрасти в тебе всі гроші.")
-gypsy.set_conversation("Чи немає у вас 15 гривень на проїзд?")
+gypsy.set_conversation("Чи немає у вас 15 гривень на проїзд або хоча б щось поїсти?")
 gypsy.set_needed_item("пляцок")
 gypsy.set_thanks("Дякую за пляцок. Це краще, ніж твої гроші.")
 lychakivska.set_character(gypsy)
@@ -81,92 +83,95 @@ cafe.set_description("Сьогодні тут відбувається щось 
 lychakivska.set_cafe(cafe)
 
 book = game_lviv.Item("книжка")
-book.set_description("Книжка історії Львова.")
+book.set_description("Книжка з історії Львова.")
 gorodotska.set_item(book)
 
 map = game_lviv.Item("карта")
 map.set_description("Карта Львова, яка допоможе знайти будь-який шлях.")
 kopernyka.set_item(map)
 
-current_street = prospect_svobody
-backpack = ['руки']
-playing = True
+if start == 'старт':
+    current_street = prospect_svobody
+    backpack = ['руки']
+    playing = True
 
-playing = True
-while playing:
-    print("\n")
-    current_street.get_description()
- 
-    character = current_street.get_character()
-    if character is not None:
-        print('-----------------------------------------')
-        character.describe()
- 
-    item = current_street.get_item()
-    if item is not None:
-        print('-----------------------------------------')
-        item.get_description()
-
-    cafe = current_street.get_cafe()
-    if cafe is not None:
-        print('-----------------------------------------')
-        cafe.get_description()
-
-    command = input("> ")
-
-    if command == "наліво" or command == "направо":
-        current_street = current_street.move(command)
-    elif command == "говорити":
-        character.talk()
-    elif command == "допомогти":
+    playing = True
+    while playing:
+        print("\n")
+        current_street.get_description()
+    
+        character = current_street.get_character()
         if character is not None:
-            print("Чим ти можеш допомогти?")
-            help_item = input("> ")
-            if help_item in backpack:
-                if character.get_name() == 'Циган':
-                    if help_item == character.get_needed_item():
+            print('-----------------------------------------')
+            character.describe()
+    
+        item = current_street.get_item()
+        if item is not None:
+            print('-----------------------------------------')
+            item.get_description()
+
+        cafe = current_street.get_cafe()
+        if cafe is not None:
+            print('-----------------------------------------')
+            cafe.get_description()
+
+        command = input("> ")
+
+        if command == "наліво" or command == "направо":
+            current_street = current_street.move(command)
+        elif command == "говорити":
+            character.talk()
+        elif command == "допомогти":
+            if character is not None:
+                print("Чим ти можеш допомогти?")
+                help_item = input("> ")
+                if help_item in backpack:
+                    if character.get_name() == 'Циган':
+                        if help_item == character.get_needed_item():
+                            character.get_thanks()
+                        else:
+                            character.get_money()
+                            print("На жаль, у тебе вкрали всі гроші :(")
+                            playing = False
+                        current_street.character = None
+                        backpack.remove(help_item)
+                    elif help_item == character.get_needed_item():
                         character.get_thanks()
+                        if character.bonus != None:
+                            print(f"Ти отримав бонус - {character.get_bonus()}.")
+                            backpack.append(character.get_bonus())
+                            current_street.character = None
+                        else:
+                            print("Молодець! Ти допоміг і отримав 5 гривень.")
+                            character.get_money()
+                            current_street.character = None
+                        backpack.remove(help_item)
+                        if game_lviv.balance == 15:
+                            print("Ти переміг! Тепер спокійно можеш сідати в 53 маршрутку і їхати в УКУ.")
+                            playing = False
                     else:
-                        character.get_money()
-                        print("На жаль, у тебе вкрали всі гроші :(")
-                        playing = False
-                    current_street.character = None
-                    backpack.remove(help_item)
-                elif help_item == character.get_needed_item():
-                    character.get_thanks()
-                    if character.bonus != None:
-                        print(f"Ти отримав бонус - {character.get_bonus()}.")
-                        backpack.append(character.get_bonus())
-                        current_street.character = None
-                    else:
-                        print("Молодець! Ти допоміг і отримав 5 гривень.")
-                        character.get_money()
-                        current_street.character = None
-                    backpack.remove(help_item)
-                    if game_lviv.balance == 15:
-                        print("Ти переміг! Тепер спокійно можеш сідати в 53 маршрутку і їхати в УКУ.")
-                        playing = False
+                        print("На жаль, ти не можеш допомогти, використовуючи цей предмет. Спробуй ще раз.")
                 else:
-                    print("На жаль, ти не можеш допомогти, використовуючи цей предмет. Спробуй ще раз.")
+                    print(f"На жаль, у тебе немає {help_item}.")
             else:
-                print(f"На жаль, у тебе немає {help_item}.")
+                print("Тут немає кому допомагати...")
+        elif command == "взяти":
+            if item != None:
+                item_name = item.get_name()
+                print(f"Ти взяв {item_name}.")
+                backpack.append(item_name)
+                current_street.item = None
+            else:
+                print("На цій вулиці нічого немає.")
+        elif command == "баланс":
+            print(f"У тебе зараз {game_lviv.balance} гривень.")
+        elif command == "зайти":
+            print("Ви стали нашим 10000-м клієнтом. У подарунок отримуєте каву.")
+            backpack.append("кава")
+            current_street.cafe = None
+        elif command == "рюкзак":
+            print(backpack)
         else:
-            print("Тут немає кому допомагати...")
-    elif command == "взяти":
-        if item != None:
-            item_name = item.get_name()
-            print(f"Ти взяв {item_name}.")
-            backpack.append(item_name)
-            current_street.item = None
-        else:
-            print("На цій вулиці нічого немає.")
-    elif command == "баланс":
-        print(f"У тебе зараз {game_lviv.balance} гривень.")
-    elif command == "зайти":
-        print("Ви стали нашим 10000-м клієнтом. У подарунок отримуєте каву.")
-        backpack.append("кава")
-        current_street.cafe = None
-    elif command == "рюкзак":
-        print(backpack)
-    else:
-        print("Такої команди немає.")
+            print("Такої команди немає.")
+else:
+    print("Неправильна команда. Спробуй запустити гру ще раз і написати 'старт'.")
