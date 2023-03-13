@@ -128,26 +128,26 @@ while playing:
                         character.get_thanks()
                     else:
                         character.get_money()
-                        print("На жаль, у тебе вкрали всі гроші.")
+                        print("На жаль, у тебе вкрали всі гроші :(")
                         playing = False
                     current_street.character = None
+                    backpack.remove(help_item)
                 elif help_item == character.get_needed_item():
                     character.get_thanks()
                     if character.bonus != None:
                         print(f"Ти отримав бонус - {character.get_bonus()}.")
                         backpack.append(character.get_bonus())
+                        current_street.character = None
                     else:
                         print("Молодець! Ти допоміг і отримав 5 гривень.")
                         character.get_money()
-                    current_street.character = None
-                    current_street.item = None
+                        current_street.character = None
                     backpack.remove(help_item)
                     if game_lviv.balance == 15:
                         print("Ти переміг! Тепер спокійно можеш сідати в 53 маршрутку і їхати в УКУ.")
                         playing = False
                 else:
-                    print("На жаль, ти програв і не встиг доїхати на першу пару :(")
-                    playing = False
+                    print("На жаль, ти не можеш допомогти, використовуючи цей предмет. Спробуй ще раз.")
             else:
                 print(f"На жаль, у тебе немає {help_item}.")
         else:
@@ -157,7 +157,7 @@ while playing:
             item_name = item.get_name()
             print(f"Ти взяв {item_name}.")
             backpack.append(item_name)
-            current_street.set_item(None)
+            current_street.item = None
         else:
             print("На цій вулиці нічого немає.")
     elif command == "баланс":
