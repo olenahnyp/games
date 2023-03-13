@@ -99,12 +99,12 @@ if start == 'старт':
     while playing:
         print("\n")
         current_street.get_description()
-    
+
         character = current_street.get_character()
         if character is not None:
             print('-----------------------------------------')
             character.describe()
-    
+
         item = current_street.get_item()
         if item is not None:
             print('-----------------------------------------')
