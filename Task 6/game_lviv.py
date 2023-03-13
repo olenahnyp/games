@@ -34,7 +34,7 @@ class Street:
     def set_description(self, description):
         self.description = description
     def get_description(self):
-        print(f"Ти знаходися на вулиці {self.name}")
+        print(f"Ти знаходишся на вулиці {self.name}")
         print('-----------------------------------------')
         print(self.description)
         print('-----------------------------------------')
