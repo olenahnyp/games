@@ -33,7 +33,8 @@ book.set_description("A really good book entitled 'Knitting for dummies'")
 dining_hall.set_item(book)
 
 max = game.Friend("Max", "A small rabbit, your best friend")
-max.set_conversation("Hi! Nice to meeet you")
+max.set_conversation("Hi! Nice to meeet you. I can give you some hints: you\n\
+should use cheese to fight Dave, you should use a book to fight Tabitha.")
 kitchen.set_character(max)
 
 current_room = kitchen
