@@ -9,6 +9,11 @@ class Character:
     def __init__(self, name, description):
         """
         Create attributes all characters have.
+        >>> dave = Enemy('Dave', 'A smelly zombie')
+        >>> dave.name
+        'Dave'
+        >>> dave.description
+        'A smelly zombie'
         """
         self.name = name
         self.description = description
@@ -17,6 +22,10 @@ class Character:
     def set_conversation(self, conversation):
         """
         Set a conversation for a character.
+        >>> dave = Enemy('Dave', 'A smelly zombie')
+        >>> dave.set_conversation("What's up, dude! I'm hungry.")
+        >>> dave.conversation
+        "What's up, dude! I'm hungry."
         """
         self.conversation = conversation
 
@@ -31,6 +40,10 @@ class Character:
     def talk(self):
         """
         Talk to a character.
+        >>> dave = Enemy('Dave', 'A smelly zombie')
+        >>> dave.set_conversation("What's up, dude! I'm hungry.")
+        >>> dave.talk()
+        [Dave says]: What's up, dude! I'm hungry.
         """
         print(f'[{self.name} says]: {self.conversation}')
 
@@ -118,6 +131,9 @@ class Friend(Character):
     def __init__(self, name, description):
         """
         Create attributes of a friend.
+        >>> max = Friend("Max", "A small rabbit, your best friend")
+        >>> max.name
+        'Max'
         """
         super().__init__(name, description)
 
