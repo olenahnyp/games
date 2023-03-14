@@ -6,7 +6,7 @@ class Character:
     """
     Create a parent class character.
     """
-    def __init__(self, name, description):
+    def __init__(self, name: str, description: str):
         """
         Create attributes all characters have.
         >>> dave = Enemy('Dave', 'A smelly zombie')
@@ -19,7 +19,7 @@ class Character:
         self.description = description
         self.conversation = None
 
-    def set_conversation(self, conversation):
+    def set_conversation(self, conversation: str):
         """
         Set a conversation for a character.
         >>> dave = Enemy('Dave', 'A smelly zombie')
@@ -115,7 +115,7 @@ class Room:
         """
         return self.item
 
-    def move(self, world_side):
+    def move(self, world_side: str):
         """
         Move to a different room.
         """
@@ -128,7 +128,7 @@ class Friend(Character):
     """
     Create a friend.
     """
-    def __init__(self, name, description):
+    def __init__(self, name: str, description: str):
         """
         Create attributes of a friend.
         >>> max = Friend("Max", "A small rabbit, your best friend")
@@ -150,7 +150,7 @@ class Enemy(Character):
     Create an enemy.
     """
     defeated = 0
-    def __init__(self, name, description):
+    def __init__(self, name: str, description: str):
         """
         Create attributes of an enemy.
         >>> dave = Enemy('Dave', 'A smelly zombie')
@@ -160,7 +160,7 @@ class Enemy(Character):
         super().__init__(name, description)
         self.weakness = None
 
-    def set_weakness(self, weakness):
+    def set_weakness(self, weakness: str):
         """
         Set a weakness for an enemy to kill him.
         >>> dave = Enemy('Dave', 'A smelly zombie')
@@ -190,7 +190,7 @@ class Item:
     """
     Create an item.
     """
-    def __init__(self, name):
+    def __init__(self, name: str):
         """
         Create attributes of an item.
         >>> cheese = Item('cheese')
@@ -200,7 +200,7 @@ class Item:
         self.name = name
         self.description = None
 
-    def set_description(self, description):
+    def set_description(self, description: str):
         """
         Set a description for an item.
         >>> cheese = Item('cheese')
