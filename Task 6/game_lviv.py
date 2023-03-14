@@ -1,12 +1,14 @@
 """
 Game Lviv.
 """
+
 balance = 0
+
 class Character:
     """
     Create a character.
     """
-    def __init__(self, name, description):
+    def __init__(self, name: str, description: str):
         """
         Create attributes of a character.
         >>> gypsy = Enemy("Циган", "Чоловік, який непомітно може вкрасти в тебе всі гроші.")
@@ -20,7 +22,8 @@ class Character:
         self.conversation = None
         self.needed_item = None
         self.thanks = None
-    def set_conversation(self, conversation):
+    
+    def set_conversation(self, conversation: str):
         """
         Set conversation to a character.
         >>> gypsy = Enemy("Циган", "Чоловік, який непомітно може вкрасти в тебе всі гроші.")
@@ -29,6 +32,7 @@ class Character:
         'Чи немає у вас 15 гривень на проїзд або хоча б щось поїсти?'
         """
         self.conversation = conversation
+    
     def talk(self):
         """
         Talk to a character.
@@ -38,7 +42,8 @@ class Character:
         [Циган каже]: Чи немає у вас 15 гривень на проїзд або хоча б щось поїсти?
         """
         print(f'[{self.name} каже]: {self.conversation}')
-    def set_needed_item(self, needed_item):
+    
+    def set_needed_item(self, needed_item: str):
         """
         Set needed item for a character.
         >>> gypsy = Enemy("Циган", "Чоловік, який непомітно може вкрасти в тебе всі гроші.")
@@ -47,12 +52,14 @@ class Character:
         'пляцок'
         """
         self.needed_item = needed_item
+    
     def get_needed_item(self):
         """
         Get needed item of a character.
         """
         return self.needed_item
-    def set_thanks(self, thanks):
+    
+    def set_thanks(self, thanks: str):
         """
         Set thanks for a character.
         >>> gypsy = Enemy("Циган", "Чоловік, який непомітно може вкрасти в тебе всі гроші.")
@@ -61,6 +68,7 @@ class Character:
         'Дякую за пляцок. Це краще, ніж твої гроші.'
         """
         self.thanks = thanks
+    
     def get_thanks(self):
         """
         Get thanks of a character.
@@ -70,6 +78,7 @@ class Character:
         [Циган каже]: Дякую за пляцок. Це краще, ніж твої гроші.
         """
         print(f'[{self.name} каже]: {self.thanks}')
+    
     def describe(self):
         """
         Describe a character.
@@ -78,6 +87,7 @@ class Character:
         Циган тут. Чоловік, який непомітно може вкрасти в тебе всі гроші.
         """
         print(f'{self.name} тут. {self.description}')
+    
     def get_name(self):
         """
         Get name of a character.
@@ -87,11 +97,12 @@ class Character:
         """
         return self.name
 
+
 class Street:
     """
     Create a street.
     """
-    def __init__(self, name):
+    def __init__(self, name: str):
         """
         Create attributes of a street.
         >>> lychakivska = Street("Личаківська")
@@ -104,11 +115,13 @@ class Street:
         self.character = None
         self.item = None
         self.cafe = None
-    def set_description(self, description):
+    
+    def set_description(self, description: str):
         """
         Set description to a street.
         """
         self.description = description
+    
     def get_description(self):
         """
         Get description of a street.
@@ -119,43 +132,51 @@ class Street:
         print('-----------------------------------------')
         for way in self.ways_to_go:
             print(f"Вулиця {way[0].name} {way[1]}.")
+    
     def set_character(self, character):
         """
         Set a character on a street.
         """
         self.character = character
+    
     def set_item(self, item):
         """
         Set an item on a street.
         """
         self.item = item
+    
     def set_cafe(self, cafe):
         """
         Set a cafe on a street.
         """
         self.cafe = cafe
+    
     def get_cafe(self):
         """
         Get a cafe which is on a street.
         """
         return self.cafe
+    
     def get_character(self):
         """
         Get a character which is on a street.
         """
         return self.character
+    
     def get_item(self):
         """
         Get an item which is on a street.
         """
         return self.item
+    
     def link_street(self, new_street, side: str):
         """
         Link a street to another street.
         """
         self.ways_to_go.append((new_street, side))
         return self.ways_to_go
-    def move(self, side):
+    
+    def move(self, side: str):
         """
         Move to another street.
         """
@@ -163,11 +184,12 @@ class Street:
             if way[1] == side:
                 return way[0]
 
+
 class Friend(Character):
     """
     Create a friend.
     """
-    def __init__(self, name, description):
+    def __init__(self, name: str, description: str):
         """
         Create attributes of a friend.
         >>> friend = Friend("Друг", "Друг-богослов з УКУ")
@@ -176,13 +198,15 @@ class Friend(Character):
         """
         super().__init__(name, description)
         self.bonus = None
+    
     def get_money(self):
         """
         Get money from a friend.
         """
         global balance
         balance += 5
-    def set_bonus(self, bonus):
+    
+    def set_bonus(self, bonus: str):
         """
         Set a bonus a friend can give you.
         >>> granny = Friend("Бабуся", "Бабуся, якій потрібно допогти перейти вулицю.")
@@ -191,17 +215,19 @@ class Friend(Character):
         'пляцок'
         """
         self.bonus = bonus
+    
     def get_bonus(self):
         """
         Get bonus from a certain friend.
         """
         return self.bonus
 
+
 class Enemy(Character):
     """
     Create an enemy.
     """
-    def __init__(self, name, description):
+    def __init__(self, name: str, description: str):
         """
         Create attributes of an enemy.
         >>> gypsy = Enemy("Циган", "Чоловік, який непомітно може вкрасти в тебе всі гроші.")
@@ -210,6 +236,7 @@ class Enemy(Character):
         """
         super().__init__(name, description)
         self.bonus = None
+    
     def get_money(self):
         """
         Lose all your money to an enemy.
@@ -217,11 +244,12 @@ class Enemy(Character):
         global balance
         balance = 0
 
+
 class Item:
     """
     Create an item.
     """
-    def __init__(self, name):
+    def __init__(self, name: str):
         """
         Create attributes of an item.
         >>> map = Item("карта")
@@ -230,7 +258,8 @@ class Item:
         """
         self.name = name
         self.description = None
-    def set_description(self, description):
+    
+    def set_description(self, description: str):
         """
         Set description to an item.
         >>> map = Item("карта")
@@ -239,6 +268,7 @@ class Item:
         'Карта Львова, яка допоможе знайти будь-який шлях.'
         """
         self.description = description
+    
     def get_description(self):
         """
         Get description of an item.
@@ -248,6 +278,7 @@ class Item:
         Карта Львова, яка допоможе знайти будь-який шлях. Можеш взяти цей предмет.
         """
         print(f"{self.description} Можеш взяти цей предмет.")
+    
     def get_name(self):
         """
         Get name of an item.
@@ -256,12 +287,13 @@ class Item:
         'карта'
         """
         return self.name
-    
+
+
 class Building(Item):
     """
     Create a building.
     """
-    def __init__(self, name):
+    def __init__(self, name: str):
         """
         Create attributes of a building.
         >>> cafe = Building("'Львівські круасани'")
@@ -269,6 +301,7 @@ class Building(Item):
         "'Львівські круасани'"
         """
         super().__init__(name)
+    
     def get_description(self):
         """
         Get description of a building.
@@ -277,6 +310,7 @@ class Building(Item):
         'Львівські круасани'. Можеш зайти туди.
         """
         print(f"{self.name}. Можеш зайти туди.")
+
 
 if __name__ == "__main__":
     import doctest
